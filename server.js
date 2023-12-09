@@ -1,12 +1,12 @@
 import { app } from "./app.js";
 import { connectDB } from "./data/database.js";
-
+const PORT = process.env.PORT || 8000;
 connectDB();
 
 app.get('/', (req, res) => {
     res.send("Working");
 })
 
-app.listen(5000, () => {
-    console.log(`Server listening on port ${process.env.PORT} in ${process.env.NODE_ENV} Mode`);
+app.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}`);
 })
