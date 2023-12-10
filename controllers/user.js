@@ -2,7 +2,6 @@ import Users from "../model/user.js";
 import bcrypt from 'bcrypt'
 import dotenv from 'dotenv'
 import {sendCookie} from "../utils/features.js";
-import  Jwt  from "jsonwebtoken";
 import ErrorHandler from "../middlewares/error.js";
 dotenv.config();
 
@@ -52,8 +51,8 @@ export const getMyDetails = async (req, res, next) => {
 export const logout = async (req, res, next) => {
     res.status(200).cookie("token", "", {
         expires: new Date(Date.now()),
-        sameSite: process.env.NODE_ENV === "DEVELOPMENT" ? "lax" : "none",
-        secure:process.env.NODE_ENV === "DEVELOPMENT" ? false : true
+        sameSite: "none",
+        secure: true
      }).json({
         success: true,
         message:"Logout successfully",
