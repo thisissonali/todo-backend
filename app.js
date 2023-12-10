@@ -4,6 +4,7 @@ import taskRouter from "./routes/task.js"
 import cookieParser from "cookie-parser";
 import { errorMiddleware } from "./middlewares/error.js";
 import cors from 'cors'
+import morgan from 'morgan'
 export const app = Express();
 
 app.use(Express.json());
@@ -16,6 +17,8 @@ app.use(cors({
     credentials:true,
 }))
 
+morgan.token('cookies', (req) => JSON.stringify(req.cookies));
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :cookies \n'));
 app.use("/api/v1/user", userRouter);
 
 app.use("/api/v1/task", taskRouter);
