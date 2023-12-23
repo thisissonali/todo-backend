@@ -4,7 +4,7 @@ import Task from "../model/task.js";
 export const newTask = async (req, res,next) => {
     try {
       const { title, description } = req.body;
-      await Task.create({
+        const data  = await Task.create({
         title,
         description,
         user:req.user,
@@ -12,7 +12,8 @@ export const newTask = async (req, res,next) => {
     
       res.status(200).json({
         success: true,
-        message: "Task created successfully!"
+        message: "Task created successfully!",
+        data
       })  
     } catch (error) {
         next(error);
@@ -45,7 +46,8 @@ export const updateTaskStatus = async (req, res,next) => {
     
      res.status(200).json({
         success: true,
-        message: "Task status successfully updated"
+        message: "Task status successfully updated",
+        task
      })   
     } catch (error) {
         next(error);
@@ -63,7 +65,8 @@ export const deleteTask = async (req, res,next) => {
    
     res.status(200).json({
         success: true,
-        message: "Task successfully deleted"
+        message: "Task successfully deleted",
+        data
     })
     } catch (error) {
         next(error);
